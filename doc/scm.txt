@@ -16,7 +16,8 @@ git push -u origin main
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 ## Install rustup (Rust installer)
-invoke-webscript https://win.rustup.rs -OutFile rustup-init.exe
+## powershell
+Invoke-WebRequest -Uri "https://win.rustup.rs" -OutFile "rustup-init.exe"
 .\rustup-init.exe -y
 
 ## Verify Installation
