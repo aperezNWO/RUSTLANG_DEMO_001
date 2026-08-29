@@ -4,8 +4,12 @@ use rand::Rng;
 pub const CANVAS_WIDTH: usize = 800;
 pub const CANVAS_HEIGHT: usize = 600;
 
-fn encode_intensity(iter: i64, max_iterations: i64) -> i64 {
-    if iter == max_iterations { 0 } else { iter * 255 / max_iterations }
+fn encode_intensity(iter: u32, max_iterations: u32) -> i32 {
+    if iter == max_iterations {
+        0
+    } else {
+        ((iter as u64 * 255) / max_iterations as u64) as i32
+    }
 }
 
 pub fn generate_mandelbrot(bounds: Bounds, max_iterations: u32) -> Vec<FractalPoint> {
@@ -18,7 +22,7 @@ pub fn generate_mandelbrot(bounds: Bounds, max_iterations: u32) -> Vec<FractalPo
             let c_re = bounds.x_min + (screen_x as f64 * x_range / CANVAS_WIDTH as f64);
             let c_im = bounds.y_min + (screen_y as f64 * y_range / CANVAS_HEIGHT as f64);
 
-            let (mut z_re, mut z_im, mut iter) = (0.0, 0.0, 0);
+            let (mut z_re, mut z_im, mut iter) = (0.0, 0.0, 0u32);
             while z_re * z_re + z_im * z_im <= 4.0 && iter < max_iterations {
                 let next_re = z_re * z_re - z_im * z_im + c_re;
                 let next_im = 2.0 * z_re * z_im + c_im;
@@ -47,7 +51,7 @@ pub fn generate_julia(bounds: Bounds, max_iterations: u32) -> Vec<FractalPoint> 
         for screen_x in 0..CANVAS_WIDTH {
             let mut z_re = bounds.x_min + (screen_x as f64 * x_range / CANVAS_WIDTH as f64);
             let mut z_im = bounds.y_min + (screen_y as f64 * y_range / CANVAS_HEIGHT as f64);
-            let mut iter = 0;
+            let mut iter = 0u32;
 
             while z_re * z_re + z_im * z_im <= 4.0 && iter < max_iterations {
                 let next_re = z_re * z_re - z_im * z_im + c_re;
@@ -69,7 +73,7 @@ pub fn generate_julia(bounds: Bounds, max_iterations: u32) -> Vec<FractalPoint> 
 
 pub fn generate_leaf() -> Vec<FractalPoint> {
     let mut points = Vec::new();
-    let mut pixel_grid = vec![vec![0i64; CANVAS_HEIGHT]; CANVAS_WIDTH];
+    let mut pixel_grid = vec![vec![0i32; CANVAS_HEIGHT]; CANVAS_WIDTH];
     let (mut x, mut y) = (0.0, 0.0);
     let mut rng = rand::thread_rng();
 
@@ -95,7 +99,11 @@ pub fn generate_leaf() -> Vec<FractalPoint> {
     for px in 0..CANVAS_WIDTH {
         for py in 0..CANVAS_HEIGHT {
             if pixel_grid[px][py] > 0 {
-                points.push(FractalPoint { x: px as f64, y: py as f64, intensity: pixel_grid[px][py] });
+                points.push(FractalPoint {
+                    x: px as f64,
+                    y: py as f64,
+                    intensity: pixel_grid[px][py],
+                });
             }
         }
     }
