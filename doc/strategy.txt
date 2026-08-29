@@ -1,0 +1,42 @@
+is see that there is a huge main file. is possible and is efficient to do the follwing :
+
+1. To split the source code in several ones with meaningful module names.
+2. To create a dockerfile.
+3. If you pleae give me a full project folder structure to work with visual studio code.
+4. If you can give me the commands for build, execute and deploy if apply for this rust sorce codes.
+5. The command lines needed for obtain the needed sdk and packages.
+
+///////////////////////////////////////////////////////////////////////
+
+rust-ping-api/
+├── .vscode/
+│   ├── settings.json
+│   └── launch.json
+├── src/
+│   ├── main.rs
+│   ├── config.rs
+│   ├── models/
+│   │   ├── mod.rs
+│   │   ├── access_log.rs
+│   │   ├── persona.rs
+│   │   └── fractal.rs
+│   ├── db/
+│   │   ├── mod.rs
+│   │   └── mssql.rs
+│   ├── engine/
+│   │   ├── mod.rs
+│   │   └── fractal.rs
+│   ├── algorithms/
+│   │   ├── mod.rs
+│   │   └── dijkstra.rs
+│   └── handlers/
+│       ├── mod.rs
+│       ├── health.rs
+│       ├── data.rs
+│       ├── fractals.rs
+│       └── algorithms.rs
+├── Cargo.toml
+├── Cargo.lock
+└── Dockerfile
+
+//////////////////////////////////////////////////////

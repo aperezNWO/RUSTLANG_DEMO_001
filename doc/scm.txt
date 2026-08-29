@@ -1,0 +1,63 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+// SCM
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+## GIT
+
+echo "# RUSTLANG_DEMO_001" >> README.md
+git init
+git add *
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/aperezNWO/RUSTLANG_DEMO_001.git
+git push -u origin main
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+## Install rustup (Rust installer)
+invoke-webscript https://win.rustup.rs -OutFile rustup-init.exe
+.\rustup-init.exe -y
+
+## Verify Installation
+rustc --version
+cargo --version
+
+# Recommended VS Code Extensions
+
+Rust-analyzer (Official language server for completion, syntax, and refactoring)
+
+CodeLLDB (Native debugger for Rust)
+
+Even Better TOML (Syntax highlighting for Cargo.toml)
+
+//////////////////////////////////////////////////////
+
+# Check code for syntax errors without compiling
+cargo check
+
+# Run locally in debug mode
+cargo run
+
+# Build release binary locally
+cargo build --release
+//////////////////////////////////////////////////////
+
+# Build Docker image
+docker build -t rust-ping-api .
+
+# Run Docker container
+docker run -d -p 8080:8080 --name rust-service rust-ping-api
+
+# Test service endpoint
+curl http://localhost:8080/ping
+
+////////////////////////////////////////////////
+
+Production Deployment Options
+
+Docker Cloud (Render / Fly.io / AWS ECS): Push the Docker image directly to your container registry and run on port 8080.
+
+Bare Binary Deployment: Copy the single compiled binary (target/release/rust-ping-api) to any Linux server along with SSL certificates (ca-certificates) and run it directly as a systemd service—no external runtime required.
+
+////////////////////////////////////////////////
