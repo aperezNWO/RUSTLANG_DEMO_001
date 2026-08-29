@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 tiberius = { version = "0.12", default-features = false, features = ["chrono", "tds73"] }
+chrono = "0.4"
 tokio-util = { version = "0.7", features = ["compat"] }
 tokio = { version = "1.36", features = ["full", "net"] }
 axum = "0.7"

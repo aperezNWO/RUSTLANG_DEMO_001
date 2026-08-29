@@ -4,10 +4,11 @@ use tiberius::{Client, Config, AuthMethod};
 use tokio::net::TcpStream;
 use tokio_util::compat::TokioAsyncReadCompatExt;
 use serde::{Deserialize, Serialize};
+use chrono::NaiveDateTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AccessLog {
-    pub id_column: i64,
+    pub id_column: i32,
     pub page_name: Option<String>,
     pub access_date: Option<String>,
     pub ip_value: Option<String>,
@@ -40,7 +41,7 @@ pub struct FractalPoint {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PersonaTable {
-    pub id_column: i64,
+    pub id_column: i32,
     pub ciudad: Option<String>,
     pub nombre_completo: Option<String>,
 }
@@ -96,15 +97,23 @@ pub async fn fetch_access_logs() -> Result<Vec<AccessLog>, Box<dyn std::error::E
     let mut access_logs = Vec::new();
 
     for row in rows {
-        let id_column: i64 = row.get("id_column").unwrap_or(0);
+        //let id_column: i64 = row.get("id_column").unwrap_or(0);
+        let id_column: i32 = row.get::<i32, _>("id_column").unwrap_or_default();
         let page_name: Option<&str> = row.get("page_name");
-        let access_date: Option<&str> = row.get("access_date");
+        
+        //let access_date: Option<&str> = row.get("access_date");
+        use chrono::NaiveDateTime;
+
+        let access_date: Option<NaiveDateTime> = row.get("access_date");
+        let access_date_str = access_date.map(|dt| dt.format("%Y-%m-%d %H:%M:%S").to_string());
+
         let ip_value: Option<&str> = row.get("ip_value");
 
         access_logs.push(AccessLog {
             id_column,
             page_name: page_name.map(|s| s.to_string()),
-            access_date: access_date.map(|s| s.to_string()),
+            //access_date: access_date.map(|s| s.to_string()),
+            access_date: access_date_str,
             ip_value: ip_value.map(|s| s.to_string()),
         });
     }
@@ -132,8 +141,9 @@ pub async fn fetch_persons() -> Result<Vec<PersonaTable>, Box<dyn std::error::Er
     let mut personas = Vec::new();
 
     for row in rows {
-        let id_column: i64 = row.get("id_column").unwrap_or(0);
-        let ciudad: Option<&str> = row.get("ciudad");
+        //let id_column: i64 = row.get("id_column").unwrap_or(0);
+        let id_column: i32                = row.get::<i32, _>("id_column").unwrap_or_default();
+        let ciudad: Option<&str>          = row.get("ciudad");
         let nombre_completo: Option<&str> = row.get("nombre_completo");
 
         personas.push(PersonaTable {
