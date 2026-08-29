@@ -73,6 +73,7 @@ cargo --version
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Check code for syntax errors without compiling
+## a temp folder "target" is created aside "C:\Rust\" folder 
 cargo check
 
 # Run locally in debug mode
