@@ -219,7 +219,7 @@ cargo run
 
    (irm "http://localhost:8080/api/fractals/generate?kind=3").Count
     
-   70784
+   71012
 
 3) curl "http://localhost:8080/api/data/getAllLogs"
 
@@ -288,6 +288,25 @@ docker build -t rust-ping-api .
 # Run Docker container
 docker run -d -p 8080:8080 --name rust-service rust-ping-api
 
+////////////////////////////////////////////////
+
+# create a tag previous to publish
+3) docker tag rust-ping-api:latest apereznwogmail/rust-ping-api:latest
+
+# log into docker for publish
+# get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
+## must return 'Login Succeeded'
+# 4.1) docker login
+4.1 ) echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
+
+# publish in docker hub
+# https://hub.docker.com/
+5) docker push apereznwogmail/rust-ping-api:latest 
+
+# URL FOR RENDER : https://dashboard.render.com/
+6) docker.io/apereznwogmail/rust-ping-api:latest
+
+# CRONJOB
 
 ////////////////////////////////////////////////
 
