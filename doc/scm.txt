@@ -13,32 +13,114 @@ git remote add origin https://github.com/aperezNWO/RUSTLANG_DEMO_001.git
 git push -u origin main
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+:: 1. Initialize cargo project structure in your current directory
+## only for new projects.
+## cargo init .
+
+
+
+:: 3. Run the development server
+
+
+## powershell
 
 ## Install rustup (Rust installer)
-## powershell
+## powershell  on "c:\Rust"
 Invoke-WebRequest -Uri "https://win.rustup.rs" -OutFile "rustup-init.exe"
-.\rustup-init.exe -y
+
+# 1. Define target directories for the installer process
+# Set session paths to C:\Rust
+$env:CARGO_HOME = "C:\Rust\cargo"
+$env:RUSTUP_HOME = "C:\Rust\rustup"
+$env:CARGO_TARGET_DIR = "C:\Rust\target"
+$env:Path = "C:\Rust\cargo\bin;" + $env:Path
+
+# Remove legacy config files pointing to C:\Users\Vostro
+Remove-Item -Path "C:\Rust\rustup\settings.toml" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "C:\Users\Vostro\.rustup" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "C:\Users\Vostro\.cargo" -Recurse -Force -ErrorAction SilentlyContinue
+
+# 2. Run the installer from the same session
+
+C:\Rust\rustup-init.exe -y --no-modify-path --default-host x86_64-pc-windows-gnu --default-toolchain stable-x86_64-pc-windows-gnu
+
+## To get started you need Cargo's bin directory (C:\Rust\cargo\bin) in your PATH
+## Press Win + R, type sysdm.cpl, and press Enter.
+
+Get-Command cargo | Select-Object Source
+# C:\Rust\cargo\bin\cargo.exe
 
 ## Verify Installation
+## DESACTIVAR "CONTROL INTELIGENTE DE APLICACIONES" EN WINDOWS 11
 rustc --version
 cargo --version
 
-# Recommended VS Code Extensions
 
-Rust-analyzer (Official language server for completion, syntax, and refactoring)
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-CodeLLDB (Native debugger for Rust)
 
-Even Better TOML (Syntax highlighting for Cargo.toml)
+# Recommended VS Code Extensions *************(AFTER SDK IS SET)*****************
 
-//////////////////////////////////////////////////////
+--[_] Rust-analyzer (Official language server for completion, syntax, and refactoring)
+
+--[_] CodeLLDB (Native debugger for Rust)
+
+--[_] Even Better TOML (Syntax highlighting for Cargo.toml)
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Check code for syntax errors without compiling
 cargo check
 
 # Run locally in debug mode
 cargo run
+
+/////////////////////////////////////////////////////////////
+# Test service endpoint
+/////////////////////////////////////////////////////////////
+
+## POWERSHELL
+1) irm http://localhost:8080/ping
+   iwr http://localhost:8080/ping -UseBasicParsing
+   curl http://localhost:8080/ping
+
+
+        Advertencia de seguridad: riesgo de ejecución de script                                                                    
+        Invoke-WebRequest analiza el contenido de la página web. El código de script de la página web se puede ejecutar cuando se  
+        analiza la página.                                                                                                         
+            ACCIÓN RECOMENDADA:                                                                                                  
+            Usa el modificador -UseBasicParsing para evitar la ejecución de código de script.
+
+            ¿Quieres continuar?
+            
+        [S] Sí  [O] Sí a todo  [N] No  [T] No a todo  [U] Suspender  [?] Ayuda (el valor predeterminado es "N"): s
+
+
+        StatusCode        : 204
+        StatusDescription : No Content
+        Content           : {}
+        RawContent        : HTTP/1.1 204 No Content
+                            vary: origin, access-control-request-method, access-control-request-headers
+                            access-control-allow-origin: *
+                            Date: Sat, 29 Aug 2026 06:47:21 GMT
+                            
+                            
+        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+                            [access-control-allow-origin, *], [Date, Sat, 29 Aug 2026 06:47:21 GMT]}
+        RawContentLength  : 0
+
+2) irm "http://localhost:8080/GenerateRandomVertex_SpringBoot"
+
+    [6,15]|[21,18]|[9,1]|[11,2]|[12,5]|[4,9]|[13,6]|[18,19]|[20,14]■{0,0,14,13,0,6,0,0,0}|{0,0,20,18,0,0,14,0,4}|{14,20,0,0,0,9,6,0,0}|{13,18,0,0,0,0,0,0,15}|{0,0,0,0,0,0,0,0,12}|{6,0,9,0,0,0,9,0,0}|{0,14,6,0,0,9,0,13,10}|{0,0,0,0,0,0,13,0,0}|{0,4,0,15,12,0,10,0,0}■00<[6;15]>-00-<br/>01<[21;18]>-29-[0;5]≡[5;6]≡[6;1]≡<br/>02<[9;1]>-14-[0;2]≡<br/>03<[11;2]>-13-[0;3]≡<br/>04<[12;5]>-37-[0;5]≡[5;6]≡[6;8]≡[8;4]≡<br/>05<[4;9]>-06-[0;5]≡<br/>06<[13;6]>-15-[0;5]≡[5;6]≡<br/>07<[18;19]>-28-[0;5]≡[5;6]≡[6;7]≡<br/>08<[20;14]>-25-[0;5]≡[5;6]≡[6;8]≡
+
+3) curl "http://localhost:8080/api/data/getAllLogs"
+
+2) irm "http://localhost:8080/api/fractals/generate?kind=3&max_iterations=500"
+
+//////////////////////////////////////////////////////
 
 # Build release binary locally
 cargo build --release
@@ -50,8 +132,6 @@ docker build -t rust-ping-api .
 # Run Docker container
 docker run -d -p 8080:8080 --name rust-service rust-ping-api
 
-# Test service endpoint
-curl http://localhost:8080/ping
 
 ////////////////////////////////////////////////
 

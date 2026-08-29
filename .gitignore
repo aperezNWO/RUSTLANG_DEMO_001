@@ -1,0 +1,34 @@
+# Rust / Cargo build outputs
+/target/
+**/*.rs.bk
+*.pdb
+
+# Local binary entries (e.g., rustup.exe placed in project root)
+/rustup.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Cargo lock file
+# Note: Keep Cargo.lock in git if building an Application / Binary.
+# Uncomment the line below ONLY if building a shared Library crate:
+# Cargo.lock
+
+# Visual Studio Code settings
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+
+# Environment and sensitive data
+.env
+.env.*
+!.env.example
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db

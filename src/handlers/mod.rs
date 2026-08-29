@@ -1,10 +1,8 @@
+
 use axum::{extract::Query, http::StatusCode, Json};
 use tracing::error;
+use crate::{algorithms::run_random_dijkstra, engine::{generate_julia, generate_leaf, generate_mandelbrot}, models::{AccessLog, Bounds, FractalParams, FractalPoint, PersonaTable, fetch_access_logs, fetch_persons}};
 
-use crate::algorithms::dijkstra::run_random_dijkstra;
-use crate::db::mssql::{fetch_access_logs, fetch_persons};
-use crate::engine::fractal::{generate_julia, generate_leaf, generate_mandelbrot};
-use crate::models::{AccessLog, Bounds, FractalParams, FractalPoint, PersonaTable};
 
 pub async fn ping() -> StatusCode {
     StatusCode::NO_CONTENT
