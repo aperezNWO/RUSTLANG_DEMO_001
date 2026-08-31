@@ -13,10 +13,19 @@ use tower_http::{
     trace::TraceLayer,
 };
 use tracing::info;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
 
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt::init();
+    // Enable INFO logging for both your binary crate and tower_http middleware
+    tracing_subscriber::registry()
+        .with(
+            EnvFilter::try_from_default_env().unwrap_or_else(|_| {
+                "rust_demo_001=info,tower_http=info,axum::rejection=trace".into()
+            }),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .init();
 
     let cors = CorsLayer::new()
         .allow_origin(Any)
