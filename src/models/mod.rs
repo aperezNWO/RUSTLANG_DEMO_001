@@ -4,13 +4,19 @@ use tiberius::{Client, Config, AuthMethod};
 use tokio::net::TcpStream;
 use tokio_util::compat::TokioAsyncReadCompatExt;
 use serde::{Deserialize, Serialize};
-use chrono::NaiveDateTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AccessLog {
+    #[serde(rename = "id_Column")]
     pub id_column: i32,
+
+    #[serde(rename = "pageName")]
     pub page_name: Option<String>,
+
+    #[serde(rename = "accessDate")]
     pub access_date: Option<String>,
+
+    #[serde(rename = "ipValue")]
     pub ip_value: Option<String>,
 }
 
@@ -39,12 +45,21 @@ pub struct FractalPoint {
     pub intensity: i32,
 }
 
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PersonaTable {
-    pub id_column: i32,
-    pub ciudad: Option<String>,
+    #[serde(rename = "id_Column")]
+    pub id_column: String,
+
+    #[serde(rename = "nombreCompleto")]
     pub nombre_completo: Option<String>,
+
+    #[serde(rename = "profesionOficio")]
+    pub profesion_oficio: Option<String>,
+
+    pub ciudad: Option<String>,
 }
+
 
 /// Helper to create an async connection to MS SQL Server
 async fn create_db_client() -> Result<Client<tokio_util::compat::Compat<TcpStream>>, Box<dyn std::error::Error + Send + Sync>> {
@@ -61,7 +76,6 @@ async fn create_db_client() -> Result<Client<tokio_util::compat::Compat<TcpStrea
     let client = Client::connect(config, tcp.compat()).await?;
     Ok(client)
 }
-
 pub async fn fetch_access_logs() -> Result<Vec<AccessLog>, Box<dyn std::error::Error + Send + Sync>> {
     let mut client = create_db_client().await?;
 
@@ -97,22 +111,20 @@ pub async fn fetch_access_logs() -> Result<Vec<AccessLog>, Box<dyn std::error::E
     let mut access_logs = Vec::new();
 
     for row in rows {
-        //let id_column: i64 = row.get("id_column").unwrap_or(0);
         let id_column: i32 = row.get::<i32, _>("id_column").unwrap_or_default();
         let page_name: Option<&str> = row.get("page_name");
         
-        //let access_date: Option<&str> = row.get("access_date");
         use chrono::NaiveDateTime;
-
         let access_date: Option<NaiveDateTime> = row.get("access_date");
-        let access_date_str = access_date.map(|dt| dt.format("%Y-%m-%d %H:%M:%S").to_string());
+        
+        // Formats to ISO 8601 with 'T' separator (e.g., "2026-08-31T01:49:41.717")
+        let access_date_str = access_date.map(|dt| dt.format("%Y-%m-%dT%H:%M:%S%.3f").to_string());
 
         let ip_value: Option<&str> = row.get("ip_value");
 
         access_logs.push(AccessLog {
             id_column,
             page_name: page_name.map(|s| s.to_string()),
-            //access_date: access_date.map(|s| s.to_string()),
             access_date: access_date_str,
             ip_value: ip_value.map(|s| s.to_string()),
         });
@@ -127,8 +139,9 @@ pub async fn fetch_persons() -> Result<Vec<PersonaTable>, Box<dyn std::error::Er
     let sql = "
         SELECT
              [Id_Column]            AS id_column
-            ,[Ciudad]              AS ciudad
             ,[NombreCompleto]      AS nombre_completo
+            ,[ProfesionOficio]     AS profesion_oficio
+            ,[Ciudad]              AS ciudad
         FROM
             [dbo].[Persona]
         ORDER BY
@@ -141,15 +154,19 @@ pub async fn fetch_persons() -> Result<Vec<PersonaTable>, Box<dyn std::error::Er
     let mut personas = Vec::new();
 
     for row in rows {
-        //let id_column: i64 = row.get("id_column").unwrap_or(0);
-        let id_column: i32                = row.get::<i32, _>("id_column").unwrap_or_default();
-        let ciudad: Option<&str>          = row.get("ciudad");
+        // Read id_column as i32 from Tiberius and convert to String to match output_correct.json
+        let id_column_num: i32            = row.get::<i32, _>("id_column").unwrap_or_default();
+        let id_column                     = id_column_num.to_string();
+
         let nombre_completo: Option<&str> = row.get("nombre_completo");
+        let profesion_oficio: Option<&str>= row.get("profesion_oficio");
+        let ciudad: Option<&str>          = row.get("ciudad");
 
         personas.push(PersonaTable {
             id_column,
-            ciudad: ciudad.map(|s| s.to_string()),
             nombre_completo: nombre_completo.map(|s| s.to_string()),
+            profesion_oficio: profesion_oficio.map(|s| s.to_string()),
+            ciudad: ciudad.map(|s| s.to_string()),
         });
     }
 
