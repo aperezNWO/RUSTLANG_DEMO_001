@@ -23,10 +23,15 @@ pub struct AccessLog {
 #[derive(Debug, Deserialize)]
 pub struct FractalParams {
     pub kind: u8,
+    #[serde(rename = "maxIterations")]
     pub max_iterations: Option<u32>,
+    #[serde(rename = "xMin")]
     pub x_min: Option<f64>,
+    #[serde(rename = "xMax")]
     pub x_max: Option<f64>,
+    #[serde(rename = "yMin")]
     pub y_min: Option<f64>,
+    #[serde(rename = "yMax")]
     pub y_max: Option<f64>,
 }
 
