@@ -38,6 +38,8 @@ async fn main() {
         .route("/GenerateRandomVertex_SpringBoot", get(handlers::generate_random_vertex))
         .route("/api/data/getAllLogs", get(handlers::get_all_logs))
         .route("/api/data/getAllPersons", get(handlers::get_all_persons))
+        .route("/api/version/rust", get(handlers::get_rust_version))       // <-- Rust version endpoint
+        .route("/api/version/server", get(handlers::get_server_version)) // <-- Server version endpoint
         .layer(cors)
         .layer(TraceLayer::new_for_http());
 

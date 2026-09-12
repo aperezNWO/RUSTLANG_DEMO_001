@@ -1,7 +1,18 @@
 
 use axum::{extract::Query, http::StatusCode, Json};
 use tracing::{error, info};
+use serde::Serialize;
 use crate::{algorithms::run_random_dijkstra, engine::{generate_julia, generate_leaf, generate_mandelbrot}, models::{AccessLog, Bounds, FractalParams, FractalPoint, PersonaTable, fetch_access_logs, fetch_persons}};
+
+#[derive(Serialize)]
+pub struct RustVersionResponse {
+    rust_version: &'static str,
+}
+
+#[derive(Serialize)]
+pub struct ServerVersionResponse {
+    server_version: &'static str,
+}
 
 
 pub async fn ping() -> StatusCode {
@@ -60,4 +71,16 @@ pub async fn generate_random_vertex() -> String {
     info!("generate_random_vertex() called.");
     
     run_random_dijkstra()
+}
+
+pub async fn get_rust_version() -> Json<RustVersionResponse> {
+    Json(RustVersionResponse {
+        rust_version: "Edition 2021",
+    })
+}
+
+pub async fn get_server_version() -> Json<ServerVersionResponse> {
+    Json(ServerVersionResponse {
+        server_version: env!("CARGO_PKG_VERSION"),
+    })
 }

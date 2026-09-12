@@ -78,7 +78,10 @@ cargo check
 
       Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
 
-# Run locally in debug mode
+## Build release binary locally
+cargo build --release
+
+## Run locally in debug mode
 cargo run
 
         D:\usuarios\pabloperez\dev\rust\RUST_DEMO_001>cargo run
@@ -275,38 +278,101 @@ cargo run
         ParsedHtml        : 
         RawContentLength  : 1756
 
+5) iwr http://localhost:8080/api/version/rust -UseBasicParsing
+
+    StatusCode        : 200
+    StatusDescription : OK
+    Content           : {"rust_version":"Edition 2021"}
+    RawContent        : HTTP/1.1 200 OK
+                        vary: origin, access-control-request-method, access-control-request-headers
+                        access-control-allow-origin: *
+                        Content-Length: 31
+                        Content-Type: application/json
+                        Date: Sat, 12 Sep 2026...
+    Forms             : 
+    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+                        [access-control-allow-origin, *], [Content-Length, 31], [Content-Type, application/json]...}
+    Images            : {}
+    InputFields       : {}
+    Links             : {}
+    ParsedHtml        : 
+    RawContentLength  : 31
+
+6) iwr http://localhost:8080/api/version/server -UseBasicParsing
+
+                                                                                                                            
+    StatusCode        : 200                                                                                                     
+    StatusDescription : OK                                                                                                      
+    Content           : {"server_version":"0.1.0"}                                                                              
+    RawContent        : HTTP/1.1 200 OK
+                        vary: origin, access-control-request-method, access-control-request-headers
+                        access-control-allow-origin: *
+                        Content-Length: 26
+                        Content-Type: application/json
+                        Date: Sat, 12 Sep 2026...
+    Forms             : 
+    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+                        [access-control-allow-origin, *], [Content-Length, 26], [Content-Type, application/json]...}
+    Images            : {}
+    InputFields       : {}
+    Links             : {}
+    ParsedHtml        : 
+    RawContentLength  : 26
+
 
 //////////////////////////////////////////////////////
-
-# Build release binary locally
-cargo build --release
+// DOCKER
 //////////////////////////////////////////////////////
 
 # Build Docker image
 docker build -t rust-ping-api .
 
-# Run Docker container
+# Run Docker container (optional)
 docker run -d -p 8080:8080 --name rust-service rust-ping-api
 
-////////////////////////////////////////////////
-
-# create a tag previous to publish
-3) docker tag rust-ping-api:latest apereznwogmail/rust-ping-api:latest
+#  create a tag previous to publish
+docker tag rust-ping-api:latest apereznwogmail/rust-ping-api:latest
 
 # log into docker for publish
-# get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
-## must return 'Login Succeeded'
-# 4.1) docker login
-4.1 ) echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
+# 4.1)docker login ==> direct command if docker desktop is running on the contrary use 4.2)
+4.2) remote login
+   get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
+   echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
+## must return 'Login Succeeded' on both cases
 
 # publish in docker hub
 # https://hub.docker.com/
 5) docker push apereznwogmail/rust-ping-api:latest 
 
+# This removes all stopped containers, unused networks, and dangling images
+docker system prune -a --volumes -f
+
+# This clears out hidden build caches (crucial for freeing up space)
+docker builder prune -a -f
+
+# Check disk space (outside visual studio code ==> command line)
+dir c:
+38 dirs   6.217.875.456 bytes libres
+
+//////////////////////////////////////////////////////////////
+// REMOTE SETUP
+//////////////////////////////////////////////////////////////
+
+
 # URL FOR RENDER : https://dashboard.render.com/
 6) docker.io/apereznwogmail/rust-ping-api:latest
 
-# CRONJOB
+# REMOTE TEST
+
+https://rust-ping-api-latest-6f34.onrender.com/api/version/rust
+## {"rust_version":"Edition 2021"}
+
+https://rust-ping-api-latest-6f34.onrender.com/api/version/server
+## {"server_version":"0.1.0"}
+
+# CRONJOB ==> https://console.cron-job.org/dashboard
+
+https://rust-ping-api-latest-6f34.onrender.com/ping
 
 ////////////////////////////////////////////////
 
