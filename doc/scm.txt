@@ -12,7 +12,6 @@ git branch -M main
 git remote add origin https://github.com/aperezNWO/RUSTLANG_DEMO_001.git
 git push -u origin main
 
-
 //////////////////////////////////////////////////////
 
 :: 1. Initialize cargo project structure in your current directory
@@ -335,15 +334,15 @@ docker run -d -p 8080:8080 --name rust-service rust-ping-api
 docker tag rust-ping-api:latest apereznwogmail/rust-ping-api:latest
 
 # log into docker for publish
-# 4.1)docker login ==> direct command if docker desktop is running on the contrary use 4.2)
-4.2) remote login
+# docker login ==> direct command if docker desktop is running on the contrary use 4.2)
+## remote login
    get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
    echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
-## must return 'Login Succeeded' on both cases
+   ## must return 'Login Succeeded' on both cases
 
 # publish in docker hub
 # https://hub.docker.com/
-5) docker push apereznwogmail/rust-ping-api:latest
+docker push apereznwogmail/rust-ping-api:latest
 
 # This removes all stopped containers, unused networks, and dangling images
 docker system prune -a --volumes -f
@@ -376,11 +375,12 @@ https://rust-ping-api-latest-6f34.onrender.com/api/version/server
 https://rust-ping-api-latest-6f34.onrender.com/ping
 
 ////////////////////////////////////////////////
+// GIT
+////////////////////////////////////////////////
 
-Production Deployment Options
-
-Docker Cloud (Render / Fly.io / AWS ECS): Push the Docker image directly to your container registry and run on port 8080.
-
-Bare Binary Deployment: Copy the single compiled binary (target/release/rust-ping-api) to any Linux server along with SSL certificates (ca-certificates) and run it directly as a systemd service—no external runtime required.
+git add *
+git commit -m "[Application RUST_DEMO_001] - v[1.0.0]" -m"1) health() endpoint"
+git push
+git pull
 
 ////////////////////////////////////////////////
