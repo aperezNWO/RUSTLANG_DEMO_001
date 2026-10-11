@@ -25,7 +25,7 @@ pub struct AppVersionResponse {
     app_version: &'static str,
 }
 
-pub async fn ping() -> StatusCode {
+pub async fn zero_handler() -> StatusCode {
     info!("ping() called.");
     StatusCode::NO_CONTENT
 }

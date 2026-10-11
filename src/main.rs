@@ -3,12 +3,7 @@ mod engine;
 mod handlers;
 mod models;
 
-use axum::{
-    http::{Method, StatusCode},
-    response::{IntoResponse, Response},
-    routing::get,
-    Json, Router,
-};
+use axum::{http::Method, response::IntoResponse, routing::get, Json, Router};
 use serde::Serialize;
 use std::collections::HashMap;
 use std::sync::LazyLock;
@@ -39,7 +34,7 @@ static ENDPOINT_DICTIONARY: LazyLock<HashMap<&'static str, EndpointInfo>> = Lazy
     m.insert(
         "PING_ENDPOINT",
         EndpointInfo {
-            endpoint_name: "/zero",
+            endpoint_name: "/ping",
             endpoint_description: "Render workaround",
         },
     );
@@ -92,13 +87,6 @@ static ENDPOINT_DICTIONARY: LazyLock<HashMap<&'static str, EndpointInfo>> = Lazy
             endpoint_description: "Get All Persons",
         },
     );
-    m.insert(
-        "EXTRA_SERVER_VERSION",
-        EndpointInfo {
-            endpoint_name: "/api/version/server",
-            endpoint_description: "Get Axum Server Version",
-        },
-    );
     m
 });
 
@@ -138,11 +126,6 @@ async fn health_handler() -> impl IntoResponse {
     Json(response_body)
 }
 
-// Manejador para el workaround /zero (devuelve 204 No Content, igual que en C++)
-async fn zero_handler() -> Response {
-    StatusCode::NO_CONTENT.into_response()
-}
-
 #[tokio::main]
 async fn main() {
     // Habilitar logging estructurado
@@ -170,7 +153,7 @@ async fn main() {
     let app = Router::new()
         .route(
             ENDPOINT_DICTIONARY["PING_ENDPOINT"].endpoint_name,
-            get(zero_handler),
+            get(handlers::zero_handler),
         )
         .route(
             ENDPOINT_DICTIONARY["HEALTH_ENDPOINT"].endpoint_name,
@@ -204,11 +187,6 @@ async fn main() {
             ENDPOINT_DICTIONARY["SERVER_VERSION_ENDPOINT"].endpoint_name,
             get(handlers::get_server_version),
         )
-        .route(
-            ENDPOINT_DICTIONARY["EXTRA_SERVER_VERSION"].endpoint_name,
-            get(handlers::get_server_version),
-        )
-        .route("/ping", get(handlers::ping)) // Ruta de compatibilidad adicional
         .layer(cors)
         .layer(TraceLayer::new_for_http());
 
