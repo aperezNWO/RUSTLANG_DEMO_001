@@ -73,7 +73,7 @@ cargo --version
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Check code for syntax errors without compiling
-## a temp folder "target" is created aside "C:\Rust\" folder 
+## a temp folder "target" is created aside "C:\Rust\" folder
 cargo check
 
       Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
@@ -93,77 +93,77 @@ cargo run
         Compiling itoa v1.0.18
         Compiling once_cell v1.21.4
         Compiling smallvec v1.15.2
-        Compiling windows-sys v0.61.2                                                                                          
+        Compiling windows-sys v0.61.2
         Compiling tracing-core v0.1.36
         Compiling log v0.4.34
-        Compiling scopeguard v1.2.0                                                                                            
+        Compiling scopeguard v1.2.0
         Compiling parking_lot_core v0.9.12
-        Compiling futures-io v0.3.34                                                                                           
+        Compiling futures-io v0.3.34
         Compiling futures-sink v0.3.34
-        Compiling lock_api v0.4.14                                                                                             
-        Compiling memchr v2.8.3                                                                                                
-        Compiling slab v0.4.12                                                                                                 
-        Compiling futures-task v0.3.34                                                                                         
-        Compiling http v1.5.0                                                                                                  
-        Compiling parking_lot v0.12.5                                                                                          
-        Compiling tracing v0.1.44                                                                                              
-        Compiling serde_core v1.0.229                                                                                          
-        Compiling futures-util v0.3.34                                                                                         
-        Compiling tower-service v0.3.3                                                                                         
-        Compiling tower-layer v0.3.3                                                                                           
-        Compiling zerocopy v0.8.56                                                                                             
-        Compiling http-body v1.1.0                                                                                             
-        Compiling httparse v1.10.1                                                                                             
-        Compiling futures-channel v0.3.34                                                                                      
-        Compiling mio v1.2.2                                                                                                   
-        Compiling socket2 v0.6.5                                                                                               
-        Compiling http-body-util v0.1.5                                                                                        
-        Compiling tokio v1.53.1                                                                                                
-        Compiling getrandom v0.2.17                                                                                            
-        Compiling sync_wrapper v1.0.2                                                                                          
-        Compiling percent-encoding v2.3.2                                                                                      
-        Compiling httpdate v1.0.3                                                                                              
-        Compiling atomic-waker v1.1.2                                                                                          
-        Compiling rand_core v0.6.4                                                                                             
-        Compiling form_urlencoded v1.2.2                                                                                       
-        Compiling serde v1.0.229                                                                                               
-        Compiling ppv-lite86 v0.2.21                                                                                           
-        Compiling num-traits v0.2.19                                                                                           
-        Compiling zmij v1.0.23                                                                                                 
-        Compiling lazy_static v1.5.0                                                                                           
-        Compiling mime v0.3.17                                                                                                 
-        Compiling ryu v1.0.23                                                                                                  
-        Compiling serde_urlencoded v0.7.1                                                                                      
-        Compiling chrono v0.4.45                                                                                               
-        Compiling axum-core v0.4.5                                                                                             
-        Compiling serde_json v1.0.151                                                                                          
-        Compiling rand_chacha v0.3.1                                                                                           
-        Compiling sharded-slab v0.1.7                                                                                          
-        Compiling enumflags2 v0.7.12                                                                                           
-        Compiling thiserror v1.0.69                                                                                            
-        Compiling asynchronous-codec v0.6.2                                                                                    
-        Compiling serde_path_to_error v0.1.20                                                                                  
-        Compiling nu-ansi-term v0.50.3                                                                                         
-        Compiling tracing-log v0.2.0                                                                                           
-        Compiling thread_local v1.1.10                                                                                         
-        Compiling encoding_rs v0.8.35                                                                                          
+        Compiling lock_api v0.4.14
+        Compiling memchr v2.8.3
+        Compiling slab v0.4.12
+        Compiling futures-task v0.3.34
+        Compiling http v1.5.0
+        Compiling parking_lot v0.12.5
+        Compiling tracing v0.1.44
+        Compiling serde_core v1.0.229
+        Compiling futures-util v0.3.34
+        Compiling tower-service v0.3.3
+        Compiling tower-layer v0.3.3
+        Compiling zerocopy v0.8.56
+        Compiling http-body v1.1.0
+        Compiling httparse v1.10.1
+        Compiling futures-channel v0.3.34
+        Compiling mio v1.2.2
+        Compiling socket2 v0.6.5
+        Compiling http-body-util v0.1.5
+        Compiling tokio v1.53.1
+        Compiling getrandom v0.2.17
+        Compiling sync_wrapper v1.0.2
+        Compiling percent-encoding v2.3.2
+        Compiling httpdate v1.0.3
+        Compiling atomic-waker v1.1.2
+        Compiling rand_core v0.6.4
+        Compiling form_urlencoded v1.2.2
+        Compiling serde v1.0.229
+        Compiling ppv-lite86 v0.2.21
+        Compiling num-traits v0.2.19
+        Compiling zmij v1.0.23
+        Compiling lazy_static v1.5.0
+        Compiling mime v0.3.17
+        Compiling ryu v1.0.23
+        Compiling serde_urlencoded v0.7.1
+        Compiling chrono v0.4.45
+        Compiling axum-core v0.4.5
+        Compiling serde_json v1.0.151
+        Compiling rand_chacha v0.3.1
+        Compiling sharded-slab v0.1.7
+        Compiling enumflags2 v0.7.12
+        Compiling thiserror v1.0.69
+        Compiling asynchronous-codec v0.6.2
+        Compiling serde_path_to_error v0.1.20
+        Compiling nu-ansi-term v0.50.3
+        Compiling tracing-log v0.2.0
+        Compiling thread_local v1.1.10
+        Compiling encoding_rs v0.8.35
         Compiling matchit v0.7.3
-        Compiling uuid v1.26.0                                                                                                 
-        Compiling pretty-hex v0.3.0                                                                                            
-        Compiling bitflags v2.13.1                                                                                             
-        Compiling byteorder v1.5.0                                                                                             
-        Compiling connection-string v0.2.0                                                                                     
-        Compiling tower-http v0.5.2                                                                                            
-        Compiling tracing-subscriber v0.3.23                                                                                   
-        Compiling rand v0.8.8                                                                                                  
-        Compiling hyper v1.11.1                                                                                                
-        Compiling tower v0.5.3                                                                                                 
-        Compiling tiberius v0.12.3                                                                                             
-        Compiling tokio-util v0.7.19                                                                                           
-        Compiling hyper-util v0.1.20                                                                                           
-        Compiling axum v0.7.9                                                                                                  
-        Compiling rust-ping-api v0.1.0 (D:\usuarios\pabloperez\dev\rust\RUST_DEMO_001)                                         
-            Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 33s                                                  
+        Compiling uuid v1.26.0
+        Compiling pretty-hex v0.3.0
+        Compiling bitflags v2.13.1
+        Compiling byteorder v1.5.0
+        Compiling connection-string v0.2.0
+        Compiling tower-http v0.5.2
+        Compiling tracing-subscriber v0.3.23
+        Compiling rand v0.8.8
+        Compiling hyper v1.11.1
+        Compiling tower v0.5.3
+        Compiling tiberius v0.12.3
+        Compiling tokio-util v0.7.19
+        Compiling hyper-util v0.1.20
+        Compiling axum v0.7.9
+        Compiling rust-ping-api v0.1.0 (D:\usuarios\pabloperez\dev\rust\RUST_DEMO_001)
+            Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 33s
             Running `target\debug\rust-ping-api.exe`
         2026-08-29T08:28:56.233185Z  INFO rust_ping_api: Rust API Server initializing on port 8080...
 
@@ -173,31 +173,31 @@ cargo run
 
 ## POWERSHELL
 1) iwr http://localhost:8080/ping -UseBasicParsing
-   
-    StatusCode        : 204                                                                                                    
+
+    StatusCode        : 204
     StatusDescription : No Content
     Content           : {}
     RawContent        : HTTP/1.1 204 No Content
                         vary: origin, access-control-request-method, access-control-request-headers
                         access-control-allow-origin: *
                         Date: Sat, 29 Aug 2026 08:29:51 GMT
-                        
-                        
-    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+
+
+    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                         [access-control-allow-origin, *], [Date, Sat, 29 Aug 2026 08:29:51 GMT]}
     RawContentLength  : 0
 
    curl http://localhost:8080/ping
 
 
-        Advertencia de seguridad: riesgo de ejecución de script                                                                    
-        Invoke-WebRequest analiza el contenido de la página web. El código de script de la página web se puede ejecutar cuando se  
-        analiza la página.                                                                                                         
-            ACCIÓN RECOMENDADA:                                                                                                  
+        Advertencia de seguridad: riesgo de ejecución de script
+        Invoke-WebRequest analiza el contenido de la página web. El código de script de la página web se puede ejecutar cuando se
+        analiza la página.
+            ACCIÓN RECOMENDADA:
             Usa el modificador -UseBasicParsing para evitar la ejecución de código de script.
 
             ¿Quieres continuar?
-            
+
         [S] Sí  [O] Sí a todo  [N] No  [T] No a todo  [U] Suspender  [?] Ayuda (el valor predeterminado es "N"): s
 
 
@@ -208,9 +208,9 @@ cargo run
                             vary: origin, access-control-request-method, access-control-request-headers
                             access-control-allow-origin: *
                             Date: Sat, 29 Aug 2026 06:47:21 GMT
-                            
-                            
-        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+
+
+        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                             [access-control-allow-origin, *], [Date, Sat, 29 Aug 2026 06:47:21 GMT]}
         RawContentLength  : 0
 
@@ -221,19 +221,19 @@ cargo run
 3) irm "http://localhost:8080/api/fractals/generate?kind=3&max_iterations=500"
 
    (irm "http://localhost:8080/api/fractals/generate?kind=3").Count
-    
+
    71012
 
 3) curl "http://localhost:8080/api/data/getAllLogs"
 
-        Advertencia de seguridad: riesgo de ejecución de script                                                                    
-        Invoke-WebRequest analiza el contenido de la página web. El código de script de la página web se puede ejecutar cuando se 
+        Advertencia de seguridad: riesgo de ejecución de script
+        Invoke-WebRequest analiza el contenido de la página web. El código de script de la página web se puede ejecutar cuando se
         analiza la página.
             ACCIÓN RECOMENDADA:
             Usa el modificador -UseBasicParsing para evitar la ejecución de código de script.
 
             ¿Quieres continuar?
-            
+
         [S] Sí  [O] Sí a todo  [N] No  [T] No a todo  [U] Suspender  [?] Ayuda (el valor predeterminado es "N"): s
 
 
@@ -248,7 +248,7 @@ cargo run
                             Content-Type: application/json
                             Date: Sat, 29 Aug 2...
         Forms             : {}
-        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                             [access-control-allow-origin, *], [Content-Length, 12357], [Content-Type, application/json]...}
         Images            : {}
         InputFields       : {}
@@ -257,11 +257,11 @@ cargo run
         RawContentLength  : 12357
 
 4) iwr http://localhost:8080/api/data/getAllPersons -UseBasicParsing
-                            
+
         StatusCode        : 200
         StatusDescription : OK
-        Content           : [{"id_column":1,"ciudad":"USA","nombre_completo":"Pablo Alejandro PÃ©rez 
-                            Acosta"},{"id_column":2,"ciudad":"BOGOTA","nombre_completo":"HernÃ¡n GutiÃ©rrez 
+        Content           : [{"id_column":1,"ciudad":"USA","nombre_completo":"Pablo Alejandro PÃ©rez
+                            Acosta"},{"id_column":2,"ciudad":"BOGOTA","nombre_completo":"HernÃ¡n GutiÃ©rrez
                             Bernal"},{"id_column":3,"ciudad":"BOGOTA","nomb...
         RawContent        : HTTP/1.1 200 OK
                             vary: origin, access-control-request-method, access-control-request-headers
@@ -269,13 +269,13 @@ cargo run
                             Content-Length: 1756
                             Content-Type: application/json
                             Date: Sat, 29 Aug 20...
-        Forms             : 
-        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+        Forms             :
+        Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                             [access-control-allow-origin, *], [Content-Length, 1756], [Content-Type, application/json]...}
         Images            : {}
         InputFields       : {}
         Links             : {}
-        ParsedHtml        : 
+        ParsedHtml        :
         RawContentLength  : 1756
 
 5) iwr http://localhost:8080/api/version/rust -UseBasicParsing
@@ -289,36 +289,37 @@ cargo run
                         Content-Length: 31
                         Content-Type: application/json
                         Date: Sat, 12 Sep 2026...
-    Forms             : 
-    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+    Forms             :
+    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                         [access-control-allow-origin, *], [Content-Length, 31], [Content-Type, application/json]...}
     Images            : {}
     InputFields       : {}
     Links             : {}
-    ParsedHtml        : 
+    ParsedHtml        :
     RawContentLength  : 31
 
 6) iwr http://localhost:8080/api/version/server -UseBasicParsing
 
-                                                                                                                            
-    StatusCode        : 200                                                                                                     
-    StatusDescription : OK                                                                                                      
-    Content           : {"server_version":"0.1.0"}                                                                              
+
+    StatusCode        : 200
+    StatusDescription : OK
+    Content           : {"server_version":"0.1.0"}
     RawContent        : HTTP/1.1 200 OK
                         vary: origin, access-control-request-method, access-control-request-headers
                         access-control-allow-origin: *
                         Content-Length: 26
                         Content-Type: application/json
                         Date: Sat, 12 Sep 2026...
-    Forms             : 
-    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers], 
+    Forms             :
+    Headers           : {[vary, origin, access-control-request-method, access-control-request-headers],
                         [access-control-allow-origin, *], [Content-Length, 26], [Content-Type, application/json]...}
     Images            : {}
     InputFields       : {}
     Links             : {}
-    ParsedHtml        : 
+    ParsedHtml        :
     RawContentLength  : 26
 
+7) irm "http://localhost:8080/health"
 
 //////////////////////////////////////////////////////
 // DOCKER
@@ -342,7 +343,7 @@ docker tag rust-ping-api:latest apereznwogmail/rust-ping-api:latest
 
 # publish in docker hub
 # https://hub.docker.com/
-5) docker push apereznwogmail/rust-ping-api:latest 
+5) docker push apereznwogmail/rust-ping-api:latest
 
 # This removes all stopped containers, unused networks, and dangling images
 docker system prune -a --volumes -f

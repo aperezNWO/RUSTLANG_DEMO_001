@@ -1,8 +1,14 @@
-
+use crate::{
+    algorithms::run_random_dijkstra,
+    engine::{generate_julia, generate_leaf, generate_mandelbrot},
+    models::{
+        fetch_access_logs, fetch_persons, AccessLog, Bounds, FractalParams, FractalPoint,
+        PersonaTable,
+    },
+};
 use axum::{extract::Query, http::StatusCode, Json};
-use tracing::{error, info};
 use serde::Serialize;
-use crate::{algorithms::run_random_dijkstra, engine::{generate_julia, generate_leaf, generate_mandelbrot}, models::{AccessLog, Bounds, FractalParams, FractalPoint, PersonaTable, fetch_access_logs, fetch_persons}};
+use tracing::{error, info};
 
 #[derive(Serialize)]
 pub struct RustVersionResponse {
@@ -14,6 +20,10 @@ pub struct ServerVersionResponse {
     server_version: &'static str,
 }
 
+#[derive(Serialize)]
+pub struct AppVersionResponse {
+    app_version: &'static str,
+}
 
 pub async fn ping() -> StatusCode {
     info!("ping() called.");
@@ -37,20 +47,34 @@ pub async fn get_all_persons() -> Result<Json<Vec<PersonaTable>>, (StatusCode, S
 }
 
 pub async fn get_fractal_handler(Query(params): Query<FractalParams>) -> Json<Vec<FractalPoint>> {
-
     let max_iterations = params.max_iterations.unwrap_or(500);
 
     let default_bounds = if params.kind == 1 {
-        Bounds { x_min: -2.0, x_max: 1.0, y_min: -1.2, y_max: 1.2 }
+        Bounds {
+            x_min: -2.0,
+            x_max: 1.0,
+            y_min: -1.2,
+            y_max: 1.2,
+        }
     } else {
-        Bounds { x_min: -1.5, x_max: 1.5, y_min: -1.5, y_max: 1.5 }
+        Bounds {
+            x_min: -1.5,
+            x_max: 1.5,
+            y_min: -1.5,
+            y_max: 1.5,
+        }
     };
 
     let bounds = match (params.x_min, params.x_max, params.y_min, params.y_max) {
-        (Some(x_min), Some(x_max), Some(y_min), Some(y_max)) => Bounds { x_min, x_max, y_min, y_max },
+        (Some(x_min), Some(x_max), Some(y_min), Some(y_max)) => Bounds {
+            x_min,
+            x_max,
+            y_min,
+            y_max,
+        },
         _ => default_bounds,
     };
-    
+
     info!(
         "get_fractal_handler() called, kind: {:?}, bounds: {:?}, max_iterations: {}",
         params.kind, bounds, max_iterations
@@ -67,9 +91,8 @@ pub async fn get_fractal_handler(Query(params): Query<FractalParams>) -> Json<Ve
 }
 
 pub async fn generate_random_vertex() -> String {
-
     info!("generate_random_vertex() called.");
-    
+
     run_random_dijkstra()
 }
 
@@ -82,5 +105,11 @@ pub async fn get_rust_version() -> Json<RustVersionResponse> {
 pub async fn get_server_version() -> Json<ServerVersionResponse> {
     Json(ServerVersionResponse {
         server_version: env!("CARGO_PKG_VERSION"),
+    })
+}
+
+pub async fn get_app_version() -> Json<AppVersionResponse> {
+    Json(AppVersionResponse {
+        app_version: "1.0.0",
     })
 }
